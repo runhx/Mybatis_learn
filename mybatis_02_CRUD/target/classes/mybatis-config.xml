@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!--引入外部配置文件-->
+    <properties resource="db.properties">
+
+    </properties>
+
+    <typeAliases>
+<!-- 在实体类比较少的时候用第一种 , 实体类多的时候用第二种 -->
+<!-- 第一种keyiDIY别名,第二种不行,但是可以通过注解起别名 -->
+<!--1. 用类取名-->
+        <typeAlias type="com.zhu.pojo.User" alias="User" />
+<!--2. 扫描包-->
+        <package name="com.zhu.pojo.User"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">  <!-- dataSource 数据源  unpolled pooled(默认) jndi-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    每一个mapper.xml都要在mybatis核心文件中注册!-->
+    <mappers>
+<!--        <mapper resource="com/zhu/dao/UserMapper.xml"/>-->
+<!--        <mapper class="com.zhu.dao.UserMapper"/>-->
+        <package name="com.zhu.dao"/>
+    </mappers>
+</configuration>

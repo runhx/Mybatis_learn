@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>     <!--标签书写位置有固定需求,不能乱写-->
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties"/>
+
+    <settings>
+        <!-- 配置标准的日志工厂实现 -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <!--起别名 因为当接口与配置文件绑定时 要写 resultType="com.zhu.pojo.User 来绑定,这样写太繁琐了 -->
+            <!-- 在实体类比较少的时候用第一种 , 实体类多的时候用第二种 -->
+            <!-- 第一种keyiDIY别名,第二种不行,但是可以通过注解起别名 -->
+
+        <!--1. 用类取名-->
+        <!--2. 扫描包-->
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">  <!-- dataSource 数据源  unpolled pooled(默认) jndi-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    <mappers>-->
+<!--        &lt;!&ndash;每一个mapper.xml都要在mybatis核心文件中注册!&ndash;&gt;-->
+<!--            &lt;!&ndash;<mapper resource="com/zhu/dao/UserMapper.xml"/>&ndash;&gt;-->
+<!--            &lt;!&ndash;<mapper class="com.zhu.dao.UserMapper"/>&ndash;&gt;-->
+<!--        <package name="com.zhu.dao"/>-->
+<!--    </mappers>-->
+    <mappers>
+        <mapper class="com.zhu.dao.TeacherMapper"/>
+        <mapper class="com.zhu.dao.StudentMapper"/>
+    </mappers>
+
+
+</configuration>
